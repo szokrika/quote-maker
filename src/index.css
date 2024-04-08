@@ -1,0 +1,506 @@
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 20px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+select,
+input,
+textarea {
+  border: 1px solid #a0a0a0;
+}
+textarea {
+  resize: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  border-radius: 3px;
+}
+.textarea {
+  min-height: 30px;
+  border-radius: 3px;
+}
+input[type="text"],
+input[type="date"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+select.province {
+  /* appearance: none; */
+
+  background-color: transparent;
+  padding: 3px 3px 3px 6px;
+  width: 160px;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: inherit;
+  cursor: inherit;
+  line-height: inherit;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-areas: "left title right";
+  grid-template-rows: 1fr;
+  min-height: max-content;
+  justify-content: center;
+  margin-bottom: 20px;
+  height: 100%;
+}
+.address {
+  grid-area: title;
+  text-align: center;
+}
+
+header textarea {
+  height: 110px;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.1rem;
+  border: 0;
+}
+
+h1 {
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+
+.invoice-no {
+  grid-area: left;
+  justify-self: end;
+  text-align: right;
+  margin: 0 0 0 20px;
+  font-size: 1.5rem;
+  width: 100px;
+  text-align: left;
+  border: 0;
+  background-color: transparent;
+  color: tomato;
+}
+
+.sale {
+  margin: 0 0 20px 0;
+  border-collapse: collapse;
+  border-top: 1px solid #000;
+}
+
+.sale .row {
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "col1 col2";
+}
+.sale .row:nth-child(even) {
+  background-color: #fff;
+}
+.sale .row.fullwidth .textarea {
+  width: 95%;
+}
+
+.sale .row .col1 {
+  grid-area: col1;
+  text-align: left;
+}
+.sale .row .col2 {
+  grid-area: col2;
+  text-align: left;
+}
+.sale .row label {
+  height: 100%;
+  padding: 0;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr min-content;
+  grid-template-areas: "label input" "label error";
+}
+.sale .row label .error {
+  font-weight: normal;
+  grid-area: error;
+  padding: 0 0 10px 10px;
+}
+.sale .row label span {
+  grid-area: label;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+.sale .row label input,
+.sale .row label textarea,
+.sale .row label select {
+  min-width: 200px;
+  height: 30px;
+  margin: 10px;
+  font-size: 1rem;
+  font-family: inherit;
+}
+.sale .row label select {
+  height: 40px;
+  min-width: 206px;
+}
+.sale .row label textarea {
+  height: 70px;
+  resize: none;
+}
+.sale .row label textarea[name="billingCycle"] {
+  height: 40px;
+}
+.client {
+  justify-self: flex-start;
+  margin: 0 20px 0 0;
+}
+.date {
+  grid-area: right;
+  justify-self: end;
+  margin: 0 0 0 20px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px 80px 100px 100px;
+  grid-template-areas: "item desc price unit amount buttons";
+  justify-content: flex-start;
+  align-items: baseline;
+  gap: 5px;
+  margin: 0 auto;
+}
+.row.footer {
+  grid-template-rows: 1fr;
+  grid-template-columns: 50px 1fr 100px 80px 100px;
+  grid-template-areas: "item desc price unit amount";
+}
+.row:nth-child(even) {
+  background-color: #f0f0f0;
+}
+.head {
+  font-size: 1.1rem;
+  font-weight: bold;
+  background-color: #f0f0f0;
+  border-bottom: 2px solid #000;
+}
+.row > div {
+  width: 100%;
+  width: max-content;
+  padding: 10px;
+}
+.row .item {
+  grid-area: item;
+  justify-items: center;
+  text-align: center;
+}
+.row .desc {
+  grid-area: desc;
+  justify-self: flex-start;
+}
+.row .desc .textarea {
+  display: block;
+  padding: 3px 4px 0 4px;
+  width: 100%;
+  min-width: 50vw;
+  min-height: 15px;
+  height: 22px;
+  line-height: 1em;
+}
+.row .price {
+  grid-area: price;
+  justify-self: flex-start;
+}
+.row .price input {
+  width: 80px;
+}
+.row .unit {
+  grid-area: unit;
+  justify-self: flex-start;
+}
+.row .unit input {
+  width: 35px;
+}
+.row .amount {
+  grid-area: amount;
+  justify-self: flex-start;
+}
+.row .amount input {
+  width: 100px;
+}
+
+.row .buttons {
+  grid-area: buttons;
+}
+
+.row input,
+.row textarea {
+  font-size: 1rem;
+  display: inline-block;
+  width: max-content;
+  font-family: inherit;
+}
+.row input:disabled {
+  border: 0;
+  color: inherit;
+  background-color: transparent;
+}
+.row.footer.border {
+  border-top: 2px solid #000;
+}
+.row.footer.smaller {
+  font-size: 0.9rem;
+}
+.cta {
+  text-align: center;
+  margin-top: 20px;
+}
+button {
+  font-size: 1rem;
+  padding: 0.3rem 1rem;
+  margin: 1px;
+  border: 0;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+.center {
+  text-align: center;
+}
+button.add-item {
+  margin: 10px auto;
+}
+button[type="submit"].valid {
+  padding: 0.6rem 1.2rem;
+  background-color: #28a745;
+}
+button[type="submit"].invalid {
+  cursor: not-allowed;
+  padding: 0.6rem 1.2rem;
+  background-color: #dc3545;
+}
+
+.small-print {
+  text-align: left;
+  font-size: 0.7rem;
+}
+.small-print.first {
+  margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 0.7rem;
+}
+
+[data-lastpass-icon-root="true"] {
+  display: none !important;
+}
+@media only screen and (max-width: 768px) {
+  header {
+    grid-template-columns: 1fr;
+    grid-template-areas: "left" "title" "right";
+    justify-content: center;
+    text-align: center;
+  }
+  header .invoice-no {
+    margin: 0;
+    color: tomato;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr);
+    grid-template-areas: "item" "desc" "price" "unit" "amount" "buttons";
+    gap: 0;
+    border: 0;
+  }
+
+  .sale .row {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas: "col1" "col2";
+    gap: 1px;
+  }
+  .sale .row.fullwidth {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "col1";
+  }
+  .sale .row .col1,
+  .sale .row .col2 {
+    border-bottom: 1px solid #000;
+    margin-bottom: 1px;
+  }
+  .row.head {
+    display: none;
+  }
+  .row > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "label input" "label error";
+    grid-template-rows: 1fr min-content;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0;
+    padding: 7px 10px;
+    width: auto;
+    column-gap: 5px;
+    border-top: 1px solid #000;
+  }
+  .row > .error {
+    grid-area: error;
+    text-align: left;
+    width: auto;
+  }
+
+  .row > div:before {
+    grid-area: label;
+    font-weight: bold;
+    width: 25vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10px;
+  }
+
+  .row > div:nth-child(odd),
+  .row > div:nth-child(odd):before {
+    background-color: #f0f0f0;
+  }
+  .row > div:nth-child(even),
+  .row > div:nth-child(even):before {
+    background-color: #fff;
+  }
+  .row.footer {
+    grid-template-rows: 1fr;
+    grid-template-areas: "unit amount";
+  }
+  .row.footer .item,
+  .row.footer .desc,
+  .row.footer .price,
+  .row.footer .buttons {
+    display: none;
+  }
+
+  .row.footer > div {
+    border: 0;
+    padding: 10px;
+    grid-template-columns: 1fr;
+    grid-template-areas: "input";
+    grid-template-rows: 1fr;
+    padding: 7px;
+  }
+  .row.footer:nth-child(even),
+  .row.footer:nth-child(odd),
+  .row.footer > div:nth-child(odd),
+  .row.footer > div:nth-child(even) {
+    background-color: #fff;
+  }
+  .row.footer > div.unit {
+    grid-area: unit;
+  }
+  .row.footer > div.amount {
+    grid-area: amount;
+  }
+  .row.footer > div:before {
+    display: none;
+  }
+  .row .item {
+    text-align: left;
+    justify-items: flex-start;
+  }
+  .row .item:before {
+    content: "Item: ";
+  }
+  .row .desc:before {
+    content: "Description:";
+  }
+  .row .price:before {
+    content: "Price:";
+  }
+  .row .unit:before {
+    content: "Unit:*";
+  }
+  .row .amount:before {
+    content: "Amount:";
+  }
+  .row .buttons:before {
+    content: "";
+    min-height: 20px;
+  }
+  .row .buttons {
+    display: flex;
+  }
+  .row .desc .textarea {
+    width: auto;
+    min-height: 25px;
+  }
+  .row .price input,
+  .row .unit input {
+    min-height: 25px;
+    border-radius: 3px;
+  }
+  .row .price input {
+    min-width: 80px;
+  }
+  .row .unit input {
+    min-width: 40px;
+  }
+}
+
+@media print {
+  header textarea {
+    margin: auto;
+    width: 100%;
+    max-width: 200px;
+  }
+  .noprint,
+  .error,
+  button {
+    display: none !important;
+  }
+  input,
+  input:disabled,
+  textarea {
+    border: 0;
+    background-color: transparent !important;
+    color: inherit;
+  }
+  .sale input,
+  .sale textarea {
+    border: 0;
+    background-color: #fff !important;
+    color: inherit;
+  }
+  .row:nth-child(even),
+  .row:nth-child(even) input,
+  .row:nth-child(even) textarea {
+    background-color: #f0f0f0;
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px 80px 110px;
+    grid-template-areas: "item desc price unit amount";
+  }
+  .row > div {
+    width: 100%;
+    padding: 10px;
+  }
+  input[type="date"]::-webkit-inner-spin-button,
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none;
+    -webkit-appearance: none;
+  }
+}
