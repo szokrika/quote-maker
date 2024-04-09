@@ -4,8 +4,8 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -13,7 +13,7 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 select,
@@ -32,8 +32,8 @@ textarea {
   min-height: 30px;
   border-radius: 3px;
 }
-input[type="text"],
-input[type="date"] {
+input[type='text'],
+input[type='date'] {
   font-family: inherit;
   font-size: inherit;
   color: inherit;
@@ -54,7 +54,7 @@ select.province {
 header {
   display: grid;
   grid-template-columns: 200px 1fr 200px;
-  grid-template-areas: "left title right";
+  grid-template-areas: 'left title right';
   grid-template-rows: 1fr;
   min-height: max-content;
   justify-content: center;
@@ -68,6 +68,7 @@ header {
 
 header textarea {
   height: 110px;
+  min-width: 250px;
   text-align: center;
   margin: 0 auto;
   font-size: 1.1rem;
@@ -104,7 +105,7 @@ h1 {
   background-color: #fff;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-areas: "col1 col2";
+  grid-template-areas: 'col1 col2';
 }
 .sale .row:nth-child(even) {
   background-color: #fff;
@@ -128,7 +129,7 @@ h1 {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr min-content;
-  grid-template-areas: "label input" "label error";
+  grid-template-areas: 'label input' 'label error';
 }
 .sale .row label .error {
   font-weight: normal;
@@ -157,7 +158,7 @@ h1 {
   height: 70px;
   resize: none;
 }
-.sale .row label textarea[name="billingCycle"] {
+.sale .row label textarea[name='billingCycle'] {
   height: 40px;
 }
 .client {
@@ -173,7 +174,7 @@ h1 {
 .row {
   display: grid;
   grid-template-columns: 50px 1fr 90px 110px 100px;
-  grid-template-areas: "item desc unit amount buttons";
+  grid-template-areas: 'item desc unit amount buttons';
   justify-content: flex-start;
   align-items: baseline;
   gap: 5px;
@@ -182,7 +183,7 @@ h1 {
 .row.footer {
   grid-template-rows: 1fr;
   grid-template-columns: 50px 1fr 100px 110px;
-  grid-template-areas: "item desc unit amount";
+  grid-template-areas: 'item desc unit amount';
 }
 .row:nth-child(even) {
   background-color: #f0f0f0;
@@ -280,11 +281,11 @@ button {
 button.add-item {
   margin: 10px auto;
 }
-button[type="submit"].valid {
+button[type='submit'].valid {
   padding: 0.6rem 1.2rem;
   background-color: #28a745;
 }
-button[type="submit"].invalid {
+button[type='submit'].invalid {
   cursor: not-allowed;
   padding: 0.6rem 1.2rem;
   background-color: #dc3545;
@@ -303,7 +304,7 @@ button[type="submit"].invalid {
   border-bottom: 1px solid #000;
   width: 300px;
   &:before {
-    content: "x";
+    content: 'x';
     display: block;
     font-size: 0.8rem;
     margin: 0 0 5px 0;
@@ -332,13 +333,13 @@ button[type="submit"].invalid {
   font-size: 0.7rem;
 }
 
-[data-lastpass-icon-root="true"] {
+[data-lastpass-icon-root='true'] {
   display: none !important;
 }
 @media only screen and (max-width: 768px) {
   header {
     grid-template-columns: 1fr;
-    grid-template-areas: "left" "title" "right";
+    grid-template-areas: 'left' 'title' 'right';
     justify-content: center;
     text-align: center;
   }
@@ -350,7 +351,7 @@ button[type="submit"].invalid {
   .row {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(5, 1fr);
-    grid-template-areas: "item" "desc" "unit" "amount" "buttons";
+    grid-template-areas: 'item' 'desc' 'unit' 'amount' 'buttons';
     gap: 0;
     border: 0;
   }
@@ -358,13 +359,13 @@ button[type="submit"].invalid {
   .sale .row {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(2, 1fr);
-    grid-template-areas: "col1" "col2";
+    grid-template-areas: 'col1' 'col2';
     gap: 1px;
   }
   .sale .row.fullwidth {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr;
-    grid-template-areas: "col1";
+    grid-template-areas: 'col1';
   }
   .sale .row .col1,
   .sale .row .col2 {
@@ -377,7 +378,7 @@ button[type="submit"].invalid {
   .row > div {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-template-areas: "label input" "label error";
+    grid-template-areas: 'label input' 'label error';
     grid-template-rows: 1fr min-content;
     justify-content: flex-start;
     align-items: center;
@@ -414,7 +415,7 @@ button[type="submit"].invalid {
   }
   .row.footer {
     grid-template-rows: 1fr;
-    grid-template-areas: "unit amount";
+    grid-template-areas: 'unit amount';
   }
   .row.footer .item,
   .row.footer .desc,
@@ -427,7 +428,7 @@ button[type="submit"].invalid {
     border: 0;
     padding: 10px;
     grid-template-columns: 1fr;
-    grid-template-areas: "input";
+    grid-template-areas: 'input';
     grid-template-rows: 1fr;
     padding: 7px;
   }
@@ -451,26 +452,26 @@ button[type="submit"].invalid {
     justify-items: flex-start;
   }
   .row .item:before {
-    content: "Item: ";
+    content: 'Item: ';
   }
   .row .desc:before {
-    content: "Description:";
+    content: 'Description:';
   }
   .row .price {
     display: none;
   }
   .row .price:before {
-    content: "Price:";
+    content: 'Price:';
     display: none;
   }
   .row .taxable:before {
-    content: "Taxable";
+    content: 'Taxable';
   }
   .row .amount:before {
-    content: "Amount:";
+    content: 'Amount:';
   }
   .row .buttons:before {
-    content: "";
+    content: '';
     min-height: 20px;
   }
   .row .buttons {
@@ -525,7 +526,7 @@ button[type="submit"].invalid {
   .row {
     display: grid;
     grid-template-columns: 50px 1fr 80px 110px;
-    grid-template-areas: "item desc unit amount";
+    grid-template-areas: 'item desc unit amount';
   }
   .row > div {
     width: 100%;
@@ -535,12 +536,12 @@ button[type="submit"].invalid {
     visibility: hidden;
   }
   .row .taxable input:before {
-    content: "x";
+    content: 'x';
     font-weight: bold;
     visibility: visible;
   }
-  input[type="date"]::-webkit-inner-spin-button,
-  input[type="date"]::-webkit-calendar-picker-indicator {
+  input[type='date']::-webkit-inner-spin-button,
+  input[type='date']::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
   }

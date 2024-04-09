@@ -1,18 +1,18 @@
-import * as Yup from "yup";
-import { ErrorMessage, Field, FieldArray, Form, Formik } from "formik";
-import React, { Fragment, useRef, useState, useEffect } from "react";
+import * as Yup from 'yup';
+import { ErrorMessage, Field, FieldArray, Form, Formik } from 'formik';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 
-import TextareaAutosize from "react-textarea-autosize";
-import kebabCase from "lodash/kebabCase";
-import logo from "./Final-cut.png";
-import { useLocalStorage } from "./hooks";
-import { useReactToPrint } from "react-to-print";
-import { db } from "./firestore";
-import { collection, doc, getDocs, setDoc } from "firebase/firestore";
+import TextareaAutosize from 'react-textarea-autosize';
+import kebabCase from 'lodash/kebabCase';
+import logo from './Final-cut.png';
+import { useLocalStorage } from './hooks';
+import { useReactToPrint } from 'react-to-print';
+import { db } from './firestore';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 
-const formatter = Intl.NumberFormat("en-CA", {
-  style: "currency",
-  currency: "CAD",
+const formatter = Intl.NumberFormat('en-CA', {
+  style: 'currency',
+  currency: 'CAD',
 });
 
 const ExpandingText = ({ field, form, ...props }) => {
@@ -45,17 +45,17 @@ const Quote = () => {
   const [taxValue, setTaxValue] = useState(0);
   const [total, setTotal] = useState(null);
   const [address, saveAddress] = useLocalStorage(
-    "address",
-    "Pentagon Millwork Ltd. \n24 Woodfern drive SW \n T2W4E4 \n (403) 555-6677"
+    'address',
+    'Pentagon Millwork Ltd. \n24 Woodfern drive SW \n T2W4E4 \n (403) 555-6677 \n pentagonmillwork@yahoo.ca'
   );
   const [addr, setAddr] = useState(address);
-  const [quote, saveQuote] = useLocalStorage("Quote", "077260");
+  const [quote, saveQuote] = useLocalStorage('Quote', '077260');
   const [quoteNo, setQuoteNo] = useState(`0${parseInt(quote) + 1}`);
-  const [client, saveClient] = useLocalStorage("client", "");
-  const [docId, setDocId] = useState("Quote");
+  const [client, saveClient] = useLocalStorage('client', '');
+  const [docId, setDocId] = useState('Quote');
 
   const saveQuoteEverywhere = async (QuoteNo) => {
-    console.log("quoteNo", quoteNo);
+    console.log('quoteNo', quoteNo);
     await saveQuotetoDB(quoteNo);
     await saveQuote(quoteNo);
     await setQuoteNo(`0${parseInt(quoteNo) + 1}`);
@@ -63,15 +63,15 @@ const Quote = () => {
 
   const saveQuotetoDB = async (QuoteNo) => {
     try {
-      await setDoc(doc(db, "quote", docId), { quoteNo });
+      await setDoc(doc(db, 'quote', docId), { quoteNo });
     } catch (error) {
-      console.error("Error adding document: ", error);
+      console.error('Error adding document: ', error);
       await saveQuote(QuoteNo);
     }
   };
   const getQuoteFromDB = async () => {
     try {
-      await getDocs(collection(db, "quote")).then((querySnapshot) => {
+      await getDocs(collection(db, 'quote')).then((querySnapshot) => {
         const newData = querySnapshot.docs.reduce((acc, doc) => {
           return (acc = { id: doc.id, ...doc.data() });
         }, {});
@@ -81,14 +81,14 @@ const Quote = () => {
         }
       });
     } catch (error) {
-      console.error("Error getting documents: ", error);
+      console.error('Error getting documents: ', error);
     }
   };
   useEffect(() => {
     getQuoteFromDB();
   }, []);
 
-  const printClient = client.split("\n")?.[0] || "client-name";
+  const printClient = client.split('\n')?.[0] || 'client-name';
   const handlePrint = useReactToPrint({
     documentTitle: `${quoteNo}-${kebabCase(
       printClient
@@ -119,7 +119,7 @@ const Quote = () => {
     let myPst = [];
 
     realValues?.forEach((item, i) => {
-      console.log("item", item);
+      console.log('item', item);
       if (item.taxable) {
         if (gst) {
           myTax.push(item.amount * gst);
@@ -146,18 +146,18 @@ const Quote = () => {
   };
 
   const validationSchema = Yup.object({
-    soldTo: Yup.string().required("required"),
-    date: Yup.date().required("required"),
-    validUntil: Yup.date().required("required"),
-    province: Yup.string().required("required"),
+    soldTo: Yup.string().required('required'),
+    date: Yup.date().required('required'),
+    validUntil: Yup.date().required('required'),
+    province: Yup.string().required('required'),
     items: Yup.array().of(
       Yup.object().shape({
-        desc: Yup.string().required("required").min(3, "Too Short!"),
-        taxable: Yup.bool().required("required"),
+        desc: Yup.string().required('required').min(3, 'Too Short!'),
+        taxable: Yup.bool().required('required'),
         amount: Yup.number()
-          .moreThan(0, "invalid")
-          .required("required")
-          .typeError("invalid"),
+          .moreThan(0, 'invalid')
+          .required('required')
+          .typeError('invalid'),
       })
     ),
   });
@@ -193,16 +193,16 @@ const Quote = () => {
       <Formik
         initialValues={{
           soldTo: client,
-          date: "",
-          validUntil: "",
-          customerId: "",
-          province: "",
-          phone: "587-839-8849",
+          date: '',
+          validUntil: '',
+          customerId: '',
+          province: '',
+          phone: '587-839-8849',
           items: [
             {
-              desc: "",
+              desc: '',
               taxable: false,
-              amount: "",
+              amount: '',
             },
           ],
         }}
@@ -293,20 +293,20 @@ const Quote = () => {
                     >
                       <option value="_">Select a province</option>
                       {[
-                        "NONE",
-                        "AB",
-                        "BC",
-                        "MB",
-                        "NB",
-                        "NL",
-                        "NS",
-                        "NT",
-                        "NU",
-                        "ON",
-                        "PE",
-                        "QC",
-                        "SK",
-                        "YT",
+                        'NONE',
+                        'AB',
+                        'BC',
+                        'MB',
+                        'NB',
+                        'NL',
+                        'NS',
+                        'NT',
+                        'NU',
+                        'ON',
+                        'PE',
+                        'QC',
+                        'SK',
+                        'YT',
                       ].map((prov) => (
                         <option key={prov} value={prov}>
                           {prov}
@@ -490,7 +490,7 @@ const Quote = () => {
                                   total + (gst || 0) + (pst || 0)
                                 ).toFixed(2)
                               )}`
-                            : ""}
+                            : ''}
                         </strong>
                       </div>
                     </div>
@@ -506,13 +506,10 @@ const Quote = () => {
                           Customer will be billed after indicating acceptance of
                           this quote.
                         </li>
+                        <li>Payment terms: net 30 days after invoice date.</li>
                         <li>
-                          Payment will be due prior to delivery of service and
-                          goods.
-                        </li>
-                        <li>
-                          Please fax or mail the signed price quote to the
-                          address above.
+                          Please fax or mail or email the signed price quote to
+                          the address above.
                         </li>
                       </ol>
                       <h3>Customer Acceptance (sign below):</h3>
@@ -532,7 +529,7 @@ const Quote = () => {
                       <button
                         disabled={!isValid}
                         type="submit"
-                        className={isValid ? "valid" : "invalid"}
+                        className={isValid ? 'valid' : 'invalid'}
                       >
                         Print Quote
                       </button>
