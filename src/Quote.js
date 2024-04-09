@@ -508,7 +508,7 @@ const Quote = () => {
                         </li>
                         <li>Payment terms: net 30 days after invoice date.</li>
                         <li>
-                          Please fax or mail or email the signed price quote to
+                          Please fax, mail or email the signed price quote to
                           the address above.
                         </li>
                       </ol>
