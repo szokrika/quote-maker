@@ -80,7 +80,7 @@ h1 {
   margin: 0 0 20px 0;
 }
 
-.invoice-no {
+.quote-no {
   grid-area: left;
   justify-self: end;
   text-align: right;
@@ -172,8 +172,8 @@ h1 {
 
 .row {
   display: grid;
-  grid-template-columns: 50px 1fr 100px 80px 100px 100px;
-  grid-template-areas: "item desc price unit amount buttons";
+  grid-template-columns: 50px 1fr 90px 110px 100px;
+  grid-template-areas: "item desc unit amount buttons";
   justify-content: flex-start;
   align-items: baseline;
   gap: 5px;
@@ -181,8 +181,8 @@ h1 {
 }
 .row.footer {
   grid-template-rows: 1fr;
-  grid-template-columns: 50px 1fr 100px 80px 100px;
-  grid-template-areas: "item desc price unit amount";
+  grid-template-columns: 50px 1fr 100px 110px;
+  grid-template-areas: "item desc unit amount";
 }
 .row:nth-child(even) {
   background-color: #f0f0f0;
@@ -298,6 +298,35 @@ button[type="submit"].invalid {
   margin-top: 10px;
 }
 
+.signature {
+  height: 30px;
+  border-bottom: 1px solid #000;
+  width: 300px;
+  &:before {
+    content: "x";
+    display: block;
+    font-size: 0.8rem;
+    margin: 0 0 5px 0;
+  }
+}
+
+.questions {
+  margin: 20px 0;
+}
+
+.questions > p {
+  margin: 0;
+}
+.questions > h4 {
+  margin-top: 10px;
+}
+
+.phone {
+  font-size: 1rem;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+
 .error {
   color: red;
   font-size: 0.7rem;
@@ -313,15 +342,15 @@ button[type="submit"].invalid {
     justify-content: center;
     text-align: center;
   }
-  header .invoice-no {
+  header .quote-no {
     margin: 0;
     color: tomato;
   }
 
   .row {
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
-    grid-template-areas: "item" "desc" "price" "unit" "amount" "buttons";
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-areas: "item" "desc" "unit" "amount" "buttons";
     gap: 0;
     border: 0;
   }
@@ -427,11 +456,15 @@ button[type="submit"].invalid {
   .row .desc:before {
     content: "Description:";
   }
+  .row .price {
+    display: none;
+  }
   .row .price:before {
     content: "Price:";
+    display: none;
   }
-  .row .unit:before {
-    content: "Unit:*";
+  .row .taxable:before {
+    content: "Taxable";
   }
   .row .amount:before {
     content: "Amount:";
@@ -491,12 +524,20 @@ button[type="submit"].invalid {
   }
   .row {
     display: grid;
-    grid-template-columns: 50px 1fr 100px 80px 110px;
-    grid-template-areas: "item desc price unit amount";
+    grid-template-columns: 50px 1fr 80px 110px;
+    grid-template-areas: "item desc unit amount";
   }
   .row > div {
     width: 100%;
     padding: 10px;
+  }
+  .row .taxable input {
+    visibility: hidden;
+  }
+  .row .taxable input:before {
+    content: "x";
+    font-weight: bold;
+    visibility: visible;
   }
   input[type="date"]::-webkit-inner-spin-button,
   input[type="date"]::-webkit-calendar-picker-indicator {
