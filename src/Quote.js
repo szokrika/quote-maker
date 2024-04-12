@@ -49,24 +49,51 @@ const Quote = () => {
     'Pentagon Millwork Ltd. \n24 Woodfern drive SW \n T2W4E4 \n (403) 555-6677 \n pentagonmillwork@yahoo.ca'
   );
   const [addr, setAddr] = useState(address);
-  const [quote, saveQuote] = useLocalStorage('Quote', '077260');
+  const [quote, saveQuote] = useLocalStorage('Quote', '01115');
   const [quoteNo, setQuoteNo] = useState(`0${parseInt(quote) + 1}`);
   const [client, saveClient] = useLocalStorage('client', '');
   const [docId, setDocId] = useState('Quote');
+  const [quoteCount, setQuoteCount] = useState(0);
+  const [docCountId, setDocCountId] = useState('Quote');
 
-  const saveQuoteEverywhere = async (QuoteNo) => {
-    console.log('quoteNo', quoteNo);
+  const saveQuoteEverywhere = async (quoteNo) => {
     await saveQuotetoDB(quoteNo);
     await saveQuote(quoteNo);
     await setQuoteNo(`0${parseInt(quoteNo) + 1}`);
   };
 
-  const saveQuotetoDB = async (QuoteNo) => {
+  const saveQuotetoDB = async (quoteNo) => {
     try {
       await setDoc(doc(db, 'quote', docId), { quoteNo });
     } catch (error) {
       console.error('Error adding document: ', error);
+      await saveQuote(quoteNo);
+    }
+  };
+
+  const saveQuoteCounttoDB = async (QuoteNo) => {
+    try {
+      await setDoc(doc(db, 'quoteCount', docCountId), {
+        quoteCount: quoteCount + 1,
+      });
+    } catch (error) {
+      console.error('Error adding document: ', error);
       await saveQuote(QuoteNo);
+    }
+  };
+  const getQuoteCountFromDB = async () => {
+    try {
+      await getDocs(collection(db, 'quoteCount')).then((querySnapshot) => {
+        const newData = querySnapshot.docs.reduce((acc, doc) => {
+          return (acc = { id: doc.id, ...doc.data() });
+        }, {});
+        if (newData.quoteCount) {
+          setQuoteCount(parseInt(newData.quoteCount));
+          setDocCountId(newData.id);
+        }
+      });
+    } catch (error) {
+      console.error('Error getting documents: ', error);
     }
   };
   const getQuoteFromDB = async () => {
@@ -86,6 +113,7 @@ const Quote = () => {
   };
   useEffect(() => {
     getQuoteFromDB();
+    getQuoteCountFromDB();
   }, []);
 
   const printClient = client.split('\n')?.[0] || 'client-name';
@@ -209,6 +237,7 @@ const Quote = () => {
         onSubmit={() => {
           saveQuoteEverywhere(quoteNo);
           handlePrint();
+          saveQuoteCounttoDB(quoteCount);
         }}
         validationSchema={validationSchema}
       >
